@@ -1,0 +1,11 @@
+---
+- name: Retrieve IP and Subnet Mask of bvbr0 Interface
+  hosts: netmask
+  tasks:
+    - name: Gather facts
+      ansible.builtin.setup:
+
+    - name: Display IP and Subnet Mask of bvbr0
+      debug:
+        msg: "Host: {{ inventory_hostname }}, IP: {{ ansible_facts['bvbr0']['ipv4']['address'] }}, Subnet Mask: {{ ansible_facts['bvbr0']['ipv4']['netmask'] }}"
+

@@ -1,0 +1,17 @@
+---
+- hosts: all
+  vars:
+    users:
+# users to add to /root/.ssh/authorized_keys
+    - username: matei.popa
+
+  tasks:
+  - name: user ssh key
+    authorized_key: user=root key="{{ lookup('file', '../ssh_keys/{{ item.username }}.pub') }}"
+    with_items: '{{users}}'
+
+# list deleted users below
+#   - name: delete users
+#     authorized_key: user=root key="{{ lookup('file', '../ssh_keys/{{ item }}.pub') }}" state=absent
+#     with_items:
+#     - matei.popa
